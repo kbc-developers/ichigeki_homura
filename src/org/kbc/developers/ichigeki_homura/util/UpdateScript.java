@@ -76,7 +76,8 @@ public class UpdateScript{
 		mProps.add( getPropsAll(text,BUILD_PRODUCT) );
 		mProps.add( getPropsAll(text,PRODUCT_DEVICE) );
 
-
+		//for Test
+		removeAssert();
 	}
 	private PropMultiItem getPropsAll(String str,String key) {
         //getprop\("[^\s]*"\) == "[^\s]*"
@@ -150,7 +151,20 @@ public class UpdateScript{
 		return val;
 	}
 
+	private void removeAssert()
+	{
+        String regex = "assert\\(([^;]*[\\w\\s\"\\r\\n])*.*\\).*;";
+        Pattern p = Pattern.compile(regex);
 
+        Matcher m = p.matcher(mScript);
+        if (m.find()){
+
+        	  //this.mScript = m.group();
+        	  Log.d(TAG,"assret "+  m.group());
+        	  this.mScript = this.mScript.substring(m.end());
+        }
+
+	}
 
 }
 
