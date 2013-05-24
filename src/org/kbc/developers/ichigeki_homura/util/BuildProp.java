@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 public class BuildProp{
 	public static final String TAG="BuildProp";
 
+	public static final String API_LEVEL="ro.build.version.sdk";
+	public static final String PRODUCT_NAME="ro.product.name";
+	public static final String PRODUCT_DEVICE="ro.product.device";
+
 	private TextFile mSrcTextFile;
 	private TextFile mDstTextFile;
 	private ArrayList<Prop>	mProps;
@@ -93,9 +97,7 @@ public class BuildProp{
 		return val;
 	}
 
-	public static final String API_LEVEL="ro.build.version.sdk";
-	public static final String PRODUCT_NAME="ro.product.name";
-	public static final String PRODUCT_DEVICE="ro.product.device";
+
 	public int getApiLevel()
 	{
 		String val = getProp(API_LEVEL);

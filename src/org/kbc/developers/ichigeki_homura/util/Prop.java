@@ -1,8 +1,8 @@
 package org.kbc.developers.ichigeki_homura.util;
 
 public class Prop{
-	private String key;
-	private String val;
+	protected String key;
+	protected String val;
 
 	public Prop(String key, String val) {
 		super();
