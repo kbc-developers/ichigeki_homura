@@ -9,6 +9,8 @@ public class TestMain {
 	private void run() {
 		Log.setLoglevel(Log.DEBUG);
 		new BuildPropTest().run();
+
+		new SerializeTest().run();
 	}
 
    public static void main(final String[] args) {
