@@ -12,9 +12,13 @@ getprop("ro.product.device") == "t0lte" || getprop("ro.build.product") == "t0lte
 public class UpdateScript{
 	public static final String TAG="UpdateScript";
 
+	public static final String BUILD_PRODUCT="ro.build.product";
+	public static final String PRODUCT_DEVICE="ro.product.device";
+
 	private TextFile mSrcTextFile;
 	private TextFile mDstTextFile;
-	private ArrayList<PropMultiItem>	mProps;
+	private PropMultiItem	mBuildProduct;
+	private PropMultiItem	mProductDevice;
 
 	private String mScript;
 
@@ -27,18 +31,17 @@ public class UpdateScript{
 	{
 		mSrcTextFile = src;
 		mDstTextFile = dst;
-
-
-
 		getPropsFromFile();
-
 	}
 	/* (非 Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return mScript;
+		String ret = getAssertDevice();
+
+		ret +=mScript;
+		return ret;
 	}
 
 	/**
@@ -55,15 +58,6 @@ public class UpdateScript{
 	    Matcher m = p.matcher(body);
 		return m.replaceAll(after);
 	}
-	public void addDevice(String device)
-	{
-		//Todo：
-		// Prop ArrayListに追加
-	}
-
-
-	public static final String BUILD_PRODUCT="ro.build.product";
-	public static final String PRODUCT_DEVICE="ro.product.device";
 
 
 	private void getPropsFromFile()
@@ -71,14 +65,15 @@ public class UpdateScript{
 		String text = mSrcTextFile.getText();
 		mScript = text;
 
+		mBuildProduct = getPropsAll(text,BUILD_PRODUCT);
+		mProductDevice  = getPropsAll(text,PRODUCT_DEVICE);
 
-		mProps = new ArrayList<PropMultiItem>();
-		mProps.add( getPropsAll(text,BUILD_PRODUCT) );
-		mProps.add( getPropsAll(text,PRODUCT_DEVICE) );
-
-		//for Test
 		removeAssert();
+		removeModemFlash();
+		removeEfsFlash();
+		replaceKernelPartition();
 	}
+
 	private PropMultiItem getPropsAll(String str,String key) {
         //getprop\("[^\s]*"\) == "[^\s]*"
 
@@ -109,46 +104,51 @@ public class UpdateScript{
         return prop;
 	}
 
-	private String getProp(String key)
+	public void addProductDevice(String val)
 	{
-		String val=null;
-///Todo
-//		for(int i=0; i < mProps.size();i++)
-//		{
-//			Prop p = mProps.get(i);
-//			if(key.equals(p.getKey()))
-//			{
-//				val =  p.getVal();
-//				break;
-//			}
-//		}
-
-		return val;
+		mProductDevice.addVal(val);
 	}
-
-
-
-
-	public String getBuild()
+	public void addBuildProduct(String val)
 	{
-		String val = getProp(BUILD_PRODUCT);
-
-		if(val== null)
+		mBuildProduct.addVal(val);
+	}
+	private String getProp(PropMultiItem prop)
+	{
+		String val="";
+///Todo
+		for(int i=0; i < prop.size();i++)
 		{
-			val = "";
+			if(i != 0)
+			{
+				val += "\n || ";
+			}
+			val+= "getprop(\""+prop.getKey()+"\") == \""+prop.getVal(i)+"\"";
 		}
+
 		return val;
 	}
 
 	public String getProductDevice()
 	{
-		String val = getProp(PRODUCT_DEVICE);
+		return getProp(this.mProductDevice);
+	}
 
-		if(val== null)
-		{
-			val = "";
-		}
-		return val;
+	public String getBuildProduct()
+	{
+		return getProp(this.mBuildProduct);
+	}
+
+	private void removeModemFlash()
+	{
+		///todo
+	}
+	private void removeEfsFlash()
+	{
+		///todo
+	}
+	private void replaceKernelPartition()
+	{
+		///todo
 	}
 
 	private void removeAssert()
@@ -158,12 +158,25 @@ public class UpdateScript{
 
         Matcher m = p.matcher(mScript);
         if (m.find()){
-
         	  //this.mScript = m.group();
-        	  Log.d(TAG,"assret "+  m.group());
+        	  //Log.d(TAG,"assret "+  m.group());
         	  this.mScript = this.mScript.substring(m.end());
         }
+	}
 
+	private String getAssertDevice()
+	{
+		String productDevice = getProductDevice();
+		String buildProduct = this.getBuildProduct();
+
+		if("".equals(productDevice) || "".equals(buildProduct))
+		{
+			//ありえないパス
+			return "";
+		}
+		String ret="assert( \n    ";
+		ret += productDevice +"\n || " + buildProduct +" );\n";
+		return ret;
 	}
 
 }

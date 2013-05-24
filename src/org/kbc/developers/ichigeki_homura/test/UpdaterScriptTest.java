@@ -10,7 +10,7 @@ import org.kbc.developers.ichigeki_homura.util.UpdateScript;
 
 
 public class UpdaterScriptTest implements Testable{
-	private	static final String TAG="BuildPropTest";
+	private	static final String TAG="UpdaterScriptTest";
 
 	TextFile mTextFile;
 	BuildProp mBuildProp;
@@ -27,6 +27,9 @@ public class UpdaterScriptTest implements Testable{
 
 		UpdateScript us = new UpdateScript(mTextFile,mTextFile);
 
+		Log.d(TAG,"-------------------");
+		Log.d(TAG,us.toString());
+		Log.d(TAG,"-------------------");
 		Log.d(TAG,"End Test");
 	}
 
