@@ -20,7 +20,12 @@ public class PropMultiItem extends Prop{
 	public String getVal(int i) {
 		return this.item.get(i);
 	}
-
+	/**
+	 * @return val
+	 */
+	public int size() {
+		return this.item.size();
+	}
 	/**
 	 * @param val セットする val
 	 */
