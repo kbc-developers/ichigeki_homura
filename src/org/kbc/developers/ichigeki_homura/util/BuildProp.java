@@ -68,8 +68,11 @@ public class BuildProp{
 			if(!line.trim().startsWith("#"))
 			{
 				String[] item = line.split("=");
-				Prop p = new Prop(item[0],item[1]);
-				mProps.add(p);
+				if(item.length >= 2)
+				{
+					Prop p = new Prop(item[0],item[1]);
+					mProps.add(p);
+				}
 			}
 		}
 	}
