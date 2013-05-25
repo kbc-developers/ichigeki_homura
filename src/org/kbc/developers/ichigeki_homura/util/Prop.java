@@ -1,7 +1,13 @@
 package org.kbc.developers.ichigeki_homura.util;
 
-public class Prop{
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+
+public class Prop implements java.io.Serializable{
+	@Attribute
 	protected String key;
+	@Element
 	protected String val;
 
 	public Prop(String key, String val) {

@@ -2,6 +2,7 @@ package org.kbc.developers.ichigeki_homura.test;
 
 import org.kbc.developers.ichigeki_homura.config.Configs;
 import org.kbc.developers.ichigeki_homura.config.ConfigsManager;
+import org.kbc.developers.ichigeki_homura.config.samsung.Configs_sc02e;
 import org.kbc.developers.ichigeki_homura.util.BuildProp;
 import org.kbc.developers.ichigeki_homura.util.Log;
 import org.kbc.developers.ichigeki_homura.util.TextFile;
@@ -33,12 +34,13 @@ public class SerializeTest implements Testable{
 
 			Log.d(TAG,"not exist file");
 
-			ddp = new Configs();
-			ddp.name ="test";
-			ddp.test ="test";
+			ddp = (Configs)new Configs_sc02e();
+
+			//ddp.updater.
 			try {
 				Log.d(TAG,"save to file");
 				cm.save(ddp);
+				Log.d(TAG,"save to file OK");
 			} catch (Exception e2) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();

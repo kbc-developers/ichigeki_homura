@@ -10,9 +10,9 @@ public class TestMain {
 		Log.setLoglevel(Log.DEBUG);
 //		new BuildPropTest().run();
 
-//		new SerializeTest().run();
+		new SerializeTest().run();
 
-		new UpdaterScriptTest().run();
+//		new UpdaterScriptTest().run();
 	}
 
    public static void main(final String[] args) {

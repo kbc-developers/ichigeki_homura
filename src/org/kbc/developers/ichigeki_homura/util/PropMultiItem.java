@@ -2,7 +2,11 @@ package org.kbc.developers.ichigeki_homura.util;
 
 import java.util.ArrayList;
 
-public class PropMultiItem extends Prop{
+import org.simpleframework.xml.ElementList;
+
+public class PropMultiItem extends Prop implements java.io.Serializable{
+
+	@ElementList
 	protected ArrayList<String> item;
 
 	public PropMultiItem(String key, String val) {
