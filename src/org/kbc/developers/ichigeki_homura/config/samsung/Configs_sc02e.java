@@ -27,7 +27,7 @@ public class Configs_sc02e extends Configs implements java.io.Serializable{
 	{
 		super();
 		name="sc02c";
-		test="";
+		test="sc02c_test";
 
 		for(int i=0;i<ADD_PROP.length;i++)
 		{

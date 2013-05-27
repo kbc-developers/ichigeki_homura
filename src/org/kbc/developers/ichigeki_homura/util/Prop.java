@@ -10,6 +10,11 @@ public class Prop implements java.io.Serializable{
 	@Element
 	protected String val;
 
+	public Prop()
+	{
+
+	}
+
 	public Prop(String key, String val) {
 		super();
 		this.key = key;
