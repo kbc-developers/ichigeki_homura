@@ -22,7 +22,7 @@ public class SerializeTest implements Testable{
 
 
 	@Override
-	public void run() {
+	public void test() {
 		Log.d(TAG,"Start Test");
 		ConfigsManager cm = new ConfigsManager(TEST_CONF);
 

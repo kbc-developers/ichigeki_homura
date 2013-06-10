@@ -18,7 +18,7 @@ public class BuildPropTest implements Testable{
 
 
 	@Override
-	public void run() {
+	public void test() {
 		Log.d(TAG,"Start Test");
 
 		Log.d(TAG,"API Level = "+ mBuildProp.getApiLevel());

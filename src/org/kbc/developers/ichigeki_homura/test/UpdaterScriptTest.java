@@ -22,7 +22,7 @@ public class UpdaterScriptTest implements Testable{
 
 /*getprop("ro.product.device") == "t0lte" || getprop("ro.build.product") == "t0lte"*/
 	@Override
-	public void run() {
+	public void test() {
 		Log.d(TAG,"Start Test");
 
 		UpdateScript us = new UpdateScript(mTextFile,mTextFile);
