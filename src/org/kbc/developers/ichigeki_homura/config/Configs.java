@@ -2,6 +2,7 @@ package org.kbc.developers.ichigeki_homura.config;
 
 import java.util.ArrayList;
 
+import org.kbc.developers.ichigeki_homura.util.Prop;
 import org.kbc.developers.ichigeki_homura.util.PropMultiItem;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -19,8 +20,6 @@ public class Configs implements java.io.Serializable{
 
 	@Element
 	public String name;
-	@Element
-	public String test;
 
 	@Element
 	public BuildPropConfig build_prop;
@@ -33,12 +32,31 @@ public class Configs implements java.io.Serializable{
 
 	public Configs()
 	{
-		name="";
-		test="";
 		updater = new UpdeterConfigs();
 		framework = new FrameworkResConfig();
+
+		init_name();
+		init_build_prop();
+		init_updater_prop();
+		init_framework();
 	}
 
+
+
+	protected void propArraytoArrayList(Prop[] props ,ArrayList<Prop> items)
+	{
+		for(int i=0;i<props.length;i++)
+		{
+			items.add(props[i]);
+		}
+	}
+
+
+
+	protected void init_name()
+	{
+		this.name="";
+	}
 	protected void init_build_prop()
 	{
 

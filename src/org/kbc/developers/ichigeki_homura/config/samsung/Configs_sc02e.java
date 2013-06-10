@@ -16,9 +16,17 @@ import org.simpleframework.xml.Root;
 public class Configs_sc02e extends Configs implements java.io.Serializable{
 
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final String CONFIG_NAME="sc02e_without_oneseg";
 	//----------------------------------------------------------
 	//Build Prop
 	//----------------------------------------------------------
+	private static final Prop[] BUILD_PROP_DEL_PROP = {
+		new Prop("ro.config.*"			,""),
+	};
 	private static final Prop[] BUILD_PROP_REPLACE_PROP = {
 		new Prop("ro.product.model"		,"SC-02E") ,
 		new Prop("ro.product.brand"		,"samsung"),
@@ -28,7 +36,6 @@ public class Configs_sc02e extends Configs implements java.io.Serializable{
 		new Prop("ro.build.description"	,"t0ltedcm-user 4.1.1 JRO03C SC02EOMALJF release-keys"),
 		new Prop("ro.build.fingerprint"	,"samsung/SC-02E/SC-02E:4.1.1/JRO03C/SC02EOMALJF:user/release-keys"),
 		new Prop("ro.factory.model"		,"SGH-N025"),
-		new Prop("ro.config.*"			,""),
 	};
 	private static final Prop[] BUILD_PROP_ADD_PROP = {
 		new Prop("ro.config.libemoji"	,"libemoji_docomo.so"),
@@ -47,63 +54,37 @@ public class Configs_sc02e extends Configs implements java.io.Serializable{
 	//----------------------------------------------------------
 	//Framework
 	//----------------------------------------------------------
-	private static final String ARRAYS_XML_PATH="";
+	private static final boolean IS_FRAME_WORK_DECODE=true;
+	private static final String ARRAYS_XML_PATH="res/values/arrays.xml";
 	private static final Prop[] ARRAYS_PROP = {
 		new Prop("/resources/string-array[@name='config_statusBarIcons']/item","felica_lock"),
 	};
 
-	public Configs_sc02e()
+	@Override
+	protected void init_name()
 	{
-		super();
-		name="sc02c";
-		test="sc02c_test";
-		//----------------------------------------------------------
-		//File Copy
-		//----------------------------------------------------------
-
-		//----------------------------------------------------------
-		//Build Prop
-		//----------------------------------------------------------
-
-		//----------------------------------------------------------
-		//Update Script
-		//----------------------------------------------------------
-		for(int i=0;i<UPDATER_ADD_PROP.length;i++)
-		{
-			updater.add_prop.add(UPDATER_ADD_PROP[i]);
-		}
-
-		//----------------------------------------------------------
-		//Framework
-		//----------------------------------------------------------
-		framework.isDecode = true;
-		framework.arrays_xml_path = ARRAYS_XML_PATH;
-
-		for(int i=0;i<UPDATER_ADD_PROP.length;i++)
-		{
-			framework.add_items.add(ARRAYS_PROP[i]);
-		}
-
+		this.name=CONFIG_NAME;
 	}
-
+	@Override
 	protected void init_build_prop()
 	{
-		for(int i=0;i<BUILD_PROP_REPLACE_PROP.length;i++)
-		{
-			build_prop.add_prop.add(BUILD_PROP_REPLACE_PROP[i]);
-		}
-		for(int i=0;i<BUILD_PROP_ADD_PROP.length;i++)
-		{
-			build_prop.add_prop.add(BUILD_PROP_ADD_PROP[i]);
-		}
+		propArraytoArrayList(BUILD_PROP_DEL_PROP  , build_prop.del_prop);
+		propArraytoArrayList(BUILD_PROP_REPLACE_PROP , build_prop.replace_prop);
+		propArraytoArrayList(BUILD_PROP_ADD_PROP , build_prop.add_prop);
 	}
+	@Override
 	protected void init_updater_prop()
 	{
-
+		propArraytoArrayList(UPDATER_ADD_PROP  , updater.add_prop);
 	}
+
+	@Override
 	protected void init_framework()
 	{
+		framework.isDecode = IS_FRAME_WORK_DECODE;
+		framework.arrays_xml_path = ARRAYS_XML_PATH;
 
+		propArraytoArrayList(ARRAYS_PROP  , framework.add_items);
 	}
 }
 

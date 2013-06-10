@@ -19,12 +19,15 @@ public class BuildPropConfig implements java.io.Serializable{
 	private static final long serialVersionUID = -3019800764906699358L;
 
 	@ElementList
+	public ArrayList<Prop> del_prop;
+	@ElementList
 	public ArrayList<Prop> replace_prop;
 	@ElementList
 	public ArrayList<Prop> add_prop;
 
 	public BuildPropConfig()
 	{
+		del_prop = new ArrayList<Prop>();
 		replace_prop = new ArrayList<Prop>();
 		add_prop = new ArrayList<Prop>();
 	}

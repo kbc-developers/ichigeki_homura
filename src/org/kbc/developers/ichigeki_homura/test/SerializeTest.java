@@ -47,7 +47,6 @@ public class SerializeTest implements Testable{
 			}
 		}
 		Log.d(TAG,"ddp.name:"+ddp.name);
-		Log.d(TAG,"ddp.test:"+ddp.test);
 
 		//TEST_CONF
 
