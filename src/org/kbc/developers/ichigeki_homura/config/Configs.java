@@ -23,6 +23,9 @@ public class Configs implements java.io.Serializable{
 	public String test;
 
 	@Element
+	public BuildPropConfig build_prop;
+
+	@Element
 	public UpdeterConfigs updater;
 
 	@Element
@@ -34,6 +37,19 @@ public class Configs implements java.io.Serializable{
 		test="";
 		updater = new UpdeterConfigs();
 		framework = new FrameworkResConfig();
+	}
+
+	protected void init_build_prop()
+	{
+
+	}
+	protected void init_updater_prop()
+	{
+
+	}
+	protected void init_framework()
+	{
+
 	}
 }
 
