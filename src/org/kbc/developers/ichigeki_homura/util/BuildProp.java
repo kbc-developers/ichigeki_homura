@@ -157,5 +157,51 @@ public class BuildProp{
 		}
 	}
 
+
+	public void delProp(String key)
+	{
+		if(key.endsWith("*") )
+		{
+			delPropAll(key);
+		}
+		else
+		{
+			for(int i=0; i < mProps.size();i++)
+			{
+				Prop p = mProps.get(i);
+				if(p.getKey().equals(key))
+				{
+					mProps.remove(i);
+					break;
+				}
+			}
+		}
+	}
+
+	private void delPropAll(String key)
+	{
+		key = key.replace("*", "");
+
+		for(;;)
+		{
+			boolean remove=false;
+			for(int i=0; i < mProps.size();i++)
+			{
+				Prop p = mProps.get(i);
+				if(p.getKey().startsWith(key))
+				{
+					mProps.remove(i);
+					remove = true;
+					break;
+				}
+			}
+			if(remove == false)
+			{
+				break;
+			}
+		}
+
+	}
+
 }
 
